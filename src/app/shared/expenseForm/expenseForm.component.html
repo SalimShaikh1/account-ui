@@ -1,0 +1,53 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">{{title}} Form</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="frm">
+      <div class="row">
+        <div class="col-sm-12">
+          <label class="form-label">Expense Main <small>*</small></label>
+          <input class="form-control form-control-sm" placeholder="Expense Main" formControlName="expenseMain">
+          @if(f.expenseMain.touched && f.expenseMain.invalid){
+          @if(f.expenseMain.errors?.['required']){
+          <small>Expense main is required.</small>
+          }
+          }
+        </div>
+        <div class="col-sm-12 mt-3">
+          <label class="form-label">Select halqua <small>*</small></label>
+          <select class="form-select form-select-sm" formControlName="halquaId" (change)="getUnit()">
+            <option selected>Select halqua</option>
+            @for(item of halquaList; track item){
+            <option value="{{item._id}}">{{item.name}}</option>
+            }
+          </select>
+          @if(f.halquaId.touched && f.halquaId.invalid){
+          @if(f.halquaId.errors?.['required']){
+          <small>Halqua selection is required.</small>
+          }
+          }
+        </div>
+        <div class="col-sm-12 mt-3">
+          <label class="form-label">Select Unit <small>*</small></label>
+          <select class="form-select form-select-sm" formControlName="unitId">
+            <option selected>Select unit</option>
+            @for(item of unitList; track item){
+            <option value="{{item._id}}">{{item.name}}</option>
+            }
+          </select>
+          @if(f.unitId.touched && f.unitId.invalid){
+          @if(f.unitId.errors?.['required']){
+          <small>Unit selection is required.</small>
+          }
+          }
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-primary btn-sm" (click)="save()">Save</button>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+.login-card {
+  width: 350px;
+  background: rgba(255, 255, 255, 0.85);
+  /* background: rgb(0 0 0 / 18%); */
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.form-control:focus {
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  border-color: #86b7fe;
+  outline: 0;
+  box-shadow: 0 0 0 0.1rem rgba(13, 110, 253, 0.25);
+}

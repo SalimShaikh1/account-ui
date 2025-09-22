@@ -1,0 +1,12 @@
+<app-table [tableData]="tableData" [title]="title" (editEvent)="editHalqua($event)"
+  (deleteEvent)="deleteHalqua($event)"></app-table>
+
+<a class="fab-btn btn btn-dark rounded-circle shadow-lg" (click)="add()">
+  <i class="fas fa-plus"></i>
+</a>
+
+<div class="modal fade" id="frmModal" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <app-bookForm [title]="title" (frmData)="saveBook($event)"></app-bookForm>
+  </div>
+</div>

@@ -1,0 +1,182 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">{{title}} Form</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="frm">
+      <div class="row">
+        <div class="col-sm-4">
+          <label class="form-label">Date <small>*</small></label>
+          <!-- <input type="date" class="form-control form-control-sm" placeholder="Date"
+            formControlName="receiptVoucherDate"> -->
+            <input type="text" id="voucherDate" class="form-control form-control-sm" placeholder="Date" formControlName="receiptVoucherDate">
+             @if(f.receiptVoucherDate.touched && f.receiptVoucherDate.invalid){
+          @if(f.receiptVoucherDate.errors?.['required']){
+          <small>Date is required.</small>
+          }
+          }
+        </div>
+        <!-- <div class="col-4">
+          <label class="form-label">Select Book <small>*</small></label>
+          <select class="form-select form-select-sm" formControlName="bookId" (change)="getNumber()">
+            <option selected>Select Book</option>
+            @for(item of bookList; track item){
+            <option value="{{item._id}}">{{item.bookNumber}}</option>
+            }
+          </select>
+          @if(f.bookId.touched && f.bookId.invalid){
+          @if(f.bookId.errors?.['required']){
+          <small>Book seelction is required.</small>
+          }
+          }
+        </div> -->
+        <div class="col-sm-4">
+          <label class="form-label">Voucher <small>*</small></label>
+          <input class="form-control form-control-sm" placeholder="Voucher No" formControlName="receiptVoucherNo">
+          @if(f.receiptVoucherNo.touched && f.receiptVoucherNo.invalid){
+          @if(f.receiptVoucherNo.errors?.['required']){
+          <small>Voucher no is required.</small>
+          }
+          }
+        </div>
+        <div class="col-sm-4">
+          <label class="form-label">Payee <small>*</small></label>
+          <input class="form-control form-control-sm" placeholder="Payee" formControlName="name">
+          @if(f.name.touched && f.name.invalid){
+          @if(f.name.errors?.['required']){
+          <small>Donor name no is required.</small>
+          }
+          }
+        </div>
+        <div class="col-sm-4 mt-3">
+          <label class="form-label">Amount <small>*</small></label>
+          <input class="form-control form-control-sm" placeholder="Amount" formControlName="amount">
+           @if(f.amount.touched && f.amount.invalid){
+          @if(f.amount.errors?.['required']){
+          <small>Amount is required.</small>
+          }
+          }
+        </div>
+        <div class="col-4 mt-3">
+          <label class="form-label">Main Head <small>*</small></label>
+          <select class="form-select form-select-sm" formControlName="head" (change)="getSubExpense()">
+            <option value="">Main Head</option>
+            @for(item of expenseList; track item){
+            <option value="{{item._id}}">{{item.expenseMain}}</option>
+            }
+          </select>
+          @if(f.head.touched && f.head.invalid){
+          @if(f.head.errors?.['required']){
+          <small>Main head is required.</small>
+          }
+          }
+        </div>
+        <div class="col-4 mt-3">
+          <label class="form-label">Sub Head <small>*</small></label>
+          <select class="form-select form-select-sm" formControlName="subHead">
+            <option value="">Sub Head</option>
+            @for(item of subExpenseList; track item){
+            <option value="{{item._id}}">{{item.expenseSub}}</option>
+            }
+          </select>
+          @if(f.subHead.touched && f.subHead.invalid){
+          @if(f.subHead.errors?.['required']){
+          <small>Sub head is required.</small>
+          }
+          }
+        </div>
+        <div class="col-4 mt-3">
+          <label class="form-label">From Bucket <small>*</small></label>
+          <select class="form-select form-select-sm" formControlName="fromHead">
+            <option value="">From Bucket</option>
+            @for(item of incomeList; track item){
+            <option value="{{item._id}}">{{item.name}}</option>
+            }
+          </select>
+          @if(f.fromHead.touched && f.fromHead.invalid){
+          @if(f.fromHead.errors?.['required']){
+          <small>From bucket is required.</small>
+          }
+          }
+        </div>
+        <div class="col-sm-4 mt-3">
+          <label class="form-label">Spent by <small>*</small></label>
+          <input class="form-control form-control-sm" placeholder="Spent by" formControlName="collected">
+          @if(f.collected.touched && f.collected.invalid){
+          @if(f.collected.errors?.['required']){
+          <small>Spent by is required.</small>
+          }
+          }
+        </div>
+        <div class="col-sm-4 mt-3">
+          <label class="form-label">Status <small>*</small></label>
+          <select class="form-select form-select-sm" formControlName="status">
+            <option value="">Status</option>
+            <option value="Holding">Holding</option>
+            <option value="Pending">Pending</option>
+            <option value="Completed">Completed</option>
+          </select>
+          @if(f.status.touched && f.status.invalid){
+          @if(f.status.errors?.['required']){
+          <small>Status is required.</small>
+          }
+          }
+        </div>
+        <div class="col-4 mt-3">
+          <label class="form-label">Payment Method <small>*</small></label>
+          <select class="form-select form-select-sm" formControlName="paymentMethod" (change)="checkPay()">
+            <option value="">Payment Method</option>
+            <option value="Bank">Bank</option>
+            <option value="Cash">Cash</option>
+          </select>
+          @if(f.paymentMethod.touched && f.paymentMethod.invalid){
+          @if(f.paymentMethod.errors?.['required']){
+          <small>Payment method is required.</small>
+          }
+          }
+        </div>
+        <div class="col-sm-4 mt-3">
+          <label class="form-label">Bank Date <small>*</small></label>
+          <!-- <input type="date" class="form-control form-control-sm" placeholder="Bank Date" formControlName="bankDate"> -->
+           <input type="text" id="voucherBank" class="form-control form-control-sm" placeholder="Bank Date" formControlName="bankDate">
+          @if(f.bankDate.touched && f.bankDate.invalid){
+          @if(f.bankDate.errors?.['required']){
+          <small>Bank date is required.</small>
+          }
+          }
+        </div>
+        <div class="col-sm-4 mt-3">
+          <label class="form-label">Bank Ref</label>
+          <input class="form-control form-control-sm" placeholder="Bank Ref" formControlName="refNo">
+        </div>
+        <div class="col-sm-4 mt-3">
+          <label class="form-label">Specially for <small>*</small></label>
+          <input class="form-control form-control-sm" placeholder="Specially for" formControlName="event">
+          @if(f.event.touched && f.event.invalid){
+          @if(f.event.errors?.['required']){
+          <small>Specially for is required.</small>
+          }
+          }
+        </div>
+        <div class="col-sm-4 mt-3">
+          <label class="form-label">Description <small>*</small></label>
+          <input class="form-control form-control-sm" placeholder="Description" formControlName="description">
+          @if(f.description.touched && f.description.invalid){
+          @if(f.description.errors?.['required']){
+          <small>Description is required.</small>
+          }
+          }
+        </div>
+        <div class="col-sm-4 mt-3">
+          <label class="form-label">Image <span style="font-size: 10px;">(File size : 1MB)</span>  </label>
+          <input type="file" class="form-control form-control-sm" accept=".jpg,.png" (change)="onFileSelected($event)">
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-primary btn-sm" (click)="save()">Save</button>
+  </div>
+</div>

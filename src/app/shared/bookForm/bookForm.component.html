@@ -1,0 +1,85 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">{{title}} Form</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="frm">
+      <div class="row">
+        <div class="col-sm-6">
+          <label class="form-label">Book Number <small>*</small></label>
+          <input class="form-control form-control-sm" placeholder="Book Number" formControlName="bookNumber" (blur)="setNumber()">
+          @if(f.bookNumber.touched && f.bookNumber.invalid){
+          @if(f.bookNumber.errors?.['required']){
+          <small>Book no is required.</small>
+          }
+          }
+        </div>
+        <div class="col-sm-6">
+          <label class="form-label">Start Number <small>*</small></label>
+          <input class="form-control form-control-sm" placeholder="Start Number" formControlName="startNumber">
+          @if(f.startNumber.touched && f.startNumber.invalid){
+          @if(f.startNumber.errors?.['required']){
+          <small>Start no is required.</small>
+          }
+          }
+        </div>
+        <div class="col-sm-6 mt-3">
+          <label class="form-label">End Number <small>*</small></label>
+          <input class="form-control form-control-sm" placeholder="End Number" formControlName="endNumber">
+          @if(f.endNumber.touched && f.endNumber.invalid){
+          @if(f.endNumber.errors?.['required']){
+          <small>End no is required.</small>
+          }
+          }
+        </div>
+        <div class="col-6 mt-3">
+          <label class="form-label">Select Halqua <small>*</small></label>
+          <select class="form-select form-select-sm" formControlName="halquaId" (change)="getUnit()">
+            <option selected>Select halqua</option>
+            @for(item of halquaList; track item){
+            <option value="{{item._id}}">{{item.name}}</option>
+            }
+          </select>
+          @if(f.halquaId.touched && f.halquaId.invalid){
+          @if(f.halquaId.errors?.['required']){
+          <small>Halqua selection is required.</small>
+          }
+          }
+        </div>
+        <div class="col-6 mt-3">
+          <label class="form-label">Select Unit <small>*</small></label>
+          <select class="form-select form-select-sm" formControlName="unitId" (change)="getCircle()">
+            <option selected>Select unit</option>
+            @for(item of unitList; track item){
+            <option value="{{item._id}}">{{item.name}}</option>
+            }
+          </select>
+          @if(f.unitId.touched && f.unitId.invalid){
+          @if(f.unitId.errors?.['required']){
+          <small>Unit selection is required.</small>
+          }
+          }
+        </div>
+        <div class="col-6 mt-3">
+          <label class="form-label">Select Circle <small>*</small></label>
+          <select class="form-select form-select-sm" formControlName="circleId">
+            <option selected>Select circle</option>
+            @for(item of circleList; track item){
+            <option value="{{item._id}}">{{item.name}}</option>
+            }
+          </select>
+          @if(f.circleId.touched && f.circleId.invalid){
+          @if(f.circleId.errors?.['required']){
+          <small>Circle selection is required.</small>
+          }
+          }
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-primary btn-sm" (click)="save()">Save</button>
+  </div>
+</div>
